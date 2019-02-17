@@ -1,0 +1,32 @@
+/*  This is css file for the Game of Thrones template web site.
+
+    Written by Alex Chalyy on 2/17/2019.    */
+
+/*  This adds game of thrones font to everything.   */    
+
+@font-face  {
+    font-family: GOTFont; 
+    src: url("../css/Game\ of\ Thrones.ttf");
+} 
+
+/*  This styles the body. */
+
+body    {
+    background-image: url("../images/game_of_thrones_hall_of_faces.jpg");
+    font-family: GOTFont;
+    color: white; 
+}
+
+/*  This styles the card body.  */
+
+.card-body  {
+    background-color: black;
+    text-align: center;
+}
+
+/*  This pushes the card down. */
+
+.card   {
+    margin-top: 10%;
+}
+
