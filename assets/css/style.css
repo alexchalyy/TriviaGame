@@ -27,9 +27,9 @@ body    {
 /*  This pushes the card down. */
 
 .card   {
-    margin-top: 10%;
+    margin-top: 15%;
     width: 70%;
-    margin-left: 12%;
+    margin-left: 15%;
 }
 
 /*  This styles the game of thrones start button.   */
@@ -46,19 +46,21 @@ body    {
 
 /*  This shrinks the throne image on smaller screens.   */
 
-@media only screen and (max-height: 1024px /* or (max-width: 823px)*/) {
-
-    @font-face  {
-        font-family: GOTFont; 
-        src: url("../css/Game\ of\ Thrones.ttf");
-    } 
+@media only screen and (max-height: 1346px) {
 
     #throne {
-        width: 90%;
+        width: 50%;
+    }
+}
+
+/*  More styling on small screens   */
+
+@media only screen and (max-height: 414px), (max-width: 414px)  {
+    .card   {
+        margin-top: 5%;
     }
 
-    body {
-        font-size: 25%;
-        font-family: GOTFont;
+    .card-title   {
+        font-size: 90%;
     }
 }
