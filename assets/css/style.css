@@ -1,4 +1,4 @@
-/*  This is css file for the Game of Thrones template web site.
+/*  This is css file for the Game of Thrones web site.
 
     Written by Alex Chalyy on 2/17/2019.    */
 
@@ -27,9 +27,10 @@ body    {
 /*  This pushes the card down. */
 
 .card   {
-    margin-top: 15%;
-    width: 70%;
-    margin-left: 15%;
+    margin-top: 5%;
+    width: 88%;
+    margin-left: 5%;
+    margin-bottom: 5%;
 }
 
 /*  This styles the game of thrones start button.   */
@@ -42,6 +43,12 @@ body    {
 
 .row3   {
     margin-top: 2%;
+}
+
+/*  This determines the font size of years. */
+
+#years  {
+    font-size: 150%;
 }
 
 /*  This shrinks the throne image on smaller screens.   */
