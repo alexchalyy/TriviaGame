@@ -51,6 +51,10 @@ body    {
     font-size: 150%;
 }
 
+#done   {
+    margin-top: 5%;
+} 
+
 /*  This shrinks the throne image on smaller screens.   */
 
 @media only screen and (max-height: 1346px) {
