@@ -1,6 +1,6 @@
 /*  This javascript uses jQueries to execute the quiz.
 
-    Written by Alex Chalyy on 2/21/2019.    */
+    Written by Alex Chalyy on 2/22/2019.    */
 
     function Timer(c)  {
         $("#time").html("Time Remaining: " + c + " seconds");
