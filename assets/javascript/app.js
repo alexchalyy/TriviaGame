@@ -1,58 +1,20 @@
 /*  This javascript uses jQueries to execute the quiz.
 
     Written by Alex Chalyy on 2/22/2019.    */
-/*
-    function Timer(c)  {
-        $("#time").html("Time Remaining: " + c + " seconds");
-        console.log("Time: " + c + " seconds.");
-    }
 
-    $("#start").click(
-        function Time() {
-            
-            console.log("Timer started");
-            for (var c = 30; c > 0; c--)    {
-                setTimeout(Timer(c), 1000);
-            }
-        }
-    );
-    */
-/*
-var c = 30;
-
-function Timer() {
-
-    $("#time").html("Time Remaining: " + c + " seconds");
-    console.log("Time: " + c + " seconds.");
-    c--;
-}
-
-$("#start").click(
-    function Time() {
-        while (c > 0)  {
-
-        }
-        
-    });
-*/
-
-//  Interval Demonstration
-    //  Set our number counter to 100.
+    //  Interval Demonstration
+    //  Set our number counter to 30.
     var number = 30;
 
     //  Variable that will hold our interval ID when we execute
     //  the "run" function
     var intervalId;
 
-    //  When the stop button gets clicked, run the stop function.
-    //$("#stop").on("click", stop);
-
     //  When the resume button gets clicked, execute the run function.
     $("#start").on("click", run);
 
     //  The run function sets an interval
     //  that runs the decrement function once a second.
-    //  *****BUG FIX******** 
     //  Clearing the intervalId prior to setting our new intervalId will not allow multiple instances.
     function run() {
       clearInterval(intervalId);
