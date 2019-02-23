@@ -1,4 +1,4 @@
-/*  This javascript uses jQueries to execute the quiz.
+/*  This javascript uses jQueries to execute the quiz. Code portions are take from class exercises.
 
     Written by Alex Chalyy on 2/22/2019.    */
 
