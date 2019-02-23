@@ -35,7 +35,8 @@ body    {
 
 /*  This styles the game of thrones start button.   */
 
-#start  {
+#start,
+#submit  {
     color: white;
 }
 

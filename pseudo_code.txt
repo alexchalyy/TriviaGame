@@ -1,0 +1,30 @@
+Trivia Game Pseudo Code
+
+
+1.	Create integer variable for unanswered questions, set it 8, log it.
+
+2.	Create integer variable for correctly answered questions, set it to 0, log it.
+
+3.	Create integer variable for incorrectly answered questions, set it to 0, log it.	
+
+4.	Start Timer after user navigates to Trivia page.
+
+5.	If timer runs out of time or unanswered questions = 0, navigate to next page,
+
+		Print correctly answered questions count
+
+		Print incorrectly answered questions count
+
+		Print unanswered questions count
+
+	else    do while unanswered questions > 0 
+
+			if user answers a question
+		
+				subtract 1 from unanswered questions
+
+				if its a correct answer
+
+					add 1 to correctly answered questions
+
+				else    add 1 to incorrectly answered questions
