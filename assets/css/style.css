@@ -51,6 +51,8 @@ body    {
     font-size: 150%;
 }
 
+/*  This styles the done button on quiz page. */
+
 #done   {
     margin-top: 5%;
 } 
