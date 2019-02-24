@@ -9,7 +9,7 @@ Trivia Game Pseudo Code
 
 4.	Start Timer after user navigates to Trivia page.
 
-5.	If timer runs out of time or unanswered questions = 0, navigate to next page,
+5.	If timer runs out of time or done page is pressed, navigate to next page,
 
 		Print correctly answered questions count
 

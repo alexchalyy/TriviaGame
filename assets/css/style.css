@@ -59,8 +59,8 @@ body    {
 } 
 
 #d10, #ca, #ia, #ua, #unanswered, #correct, #incorrect    {
-    margin-top: 3%;
-    margin-bottom: 3%;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 #d10 {
@@ -94,20 +94,24 @@ body    {
 
     #d10, #ca, #ia, #ua, #unanswered, #correct, #incorrect    {
         font-size: 50%;
-        padding-top: -10%;
-        padding-bottom: -10%;
     }
 
-    #d  {
-        padding-top: 1%;
-        padding-bottom: 1%;
+    #done_row, #d10, #cora, #cor, #correct  {
+        height: 40px;
     }
 
-    #done_row   {
-       height: 1%;
-       padding-top: 1%;
-       padding-bottom: 1%;
-       margin-top: 1%;
-       margin-bottom: 1%;
+    #cor    {
+        height: 30px;
+    } 
+
+    .row {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+        height: 30px;
     }
 }
