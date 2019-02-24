@@ -10,39 +10,54 @@ var number = 10;
 //  the "run" function
 var intervalId;
 
-//  This sets the counter variables
+//  This sets the counter variables. Also global variable is necessary to pass score values between different pages when the script reloads and all prior values are lost.
 
-var unanswered = 8;
-var correct = 0;
-var incorrect = 0;
+var globalVariable = {
+    unanswered: 8,
+    corret: 0,
+    incorrect: 0,
+    done: 0
+ };
 
-//  When the resume button gets clicked, execute the run function.
-
+function run() {
 
 //  The run function sets an interval
 //  that runs the decrement function once a second.
 //  Clearing the intervalId prior to setting our new intervalId will not allow multiple instances.
-function run() {
-    clearInterval(intervalId);
-    console.log("Quiz starts");
-    intervalId = setInterval(decrement, 1000);
+//  This function has two paths depending from which page it loads where it could retrieve score variables from local storage after next page is opened where they are stored before going there.
+//  This allows to use one script for both quiz and results page.
+
+    var vThreeLS = localStorage.getItem("vThreeLocalStorage"); 
+
+    if (vThreeLS == 1) {
+        console.log("works");
+    }   else    {
+        clearInterval(intervalId);
+        console.log("Quiz starts");
+        intervalId = setInterval(decrement, 1000);
+    }
 }
 
 function Score() {
     //  This funciton logs the scores.
 
-    console.log("unanswered questions: " + unanswered);
-    console.log("correctly answered questions: " + correct);
-    console.log("incorrectly answered questions: " + incorrect);
+    console.log("unanswered questions: " + globalVariable.unanswered);
+    console.log("correctly answered questions: " + globalVariable.correct);
+    console.log("incorrectly answered questions: " + globalVariable.incorrect);
 }
 
 function Result() {
-    //  This function prints the result scores on result page.
+    //  This function prints the result scores on result page. Since all pages are static, this function stores all results in local storage where the next page can retrieve the scores from.
 
-    $("#correct").html(correct);
-    $("#incorrect").html(incorrect);
-    $("#unaswered").html(unaswered);
-    console.log("The results are:");
+    //$("#correct").html(correct);
+    //$("#incorrect").html(incorrect);
+    //$("#unanswered").html(unanswered);
+    globalVariable.unanswered = 1;
+    globalVariable.correct = 2;
+    globalVariable.done = 1;
+    localStorage.setItem("vOneLocalStorage", globalVariable.unanswered);  
+    localStorage.setItem("vTwoLocalStorage", globalVariable.correct);
+    localStorage.setItem("vThreeLocalStorage", globalVariable.done);
     Score();
 }
 
@@ -62,10 +77,8 @@ function decrement() {
         //  ...run the stop function.
         stop();
         //  Navigate to result page, when time runs out.
-        console.log("here");
-        document.getElementById("submit").click();
-        console.log("here too");
         Result();
+        document.getElementById("sub").click();
     }
 }
 
