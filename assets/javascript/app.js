@@ -21,7 +21,7 @@ var globalVariable = {
 
 //  Global variables that determine whether any quesions have been answered.
 
-var q = ["false", "false", "false", "false", "false", "false", "false", "false", "false", "false"];
+var q = [false, false, false, false, false, false, false, false, false, false];
 
 function run() {
 
@@ -33,18 +33,20 @@ function run() {
 
     globalVariable.done = localStorage.getItem("vThreeLocalStorage");
 
-    if (globalVariable.done == 1) {
+    console.log("script starts.");
+    console.log("globalVariable.done = " + globalVariable.done);
+    if (globalVariable.done == 0) {
         console.log("This is the code section that is executed on results page.");
         console.log("Retrieving score variables from local storage...");
-        globalVariable.done = 0;
+        globalVariable.done = 1;
         localStorage.setItem("vThreeLocalStorage", globalVariable.done);
         globalVariable.unanswered = localStorage.getItem("vOneLocalStorage");
         globalVariable.correct = localStorage.getItem("vTwoLocalStorage");
         globalVariable.incorrect = localStorage.getItem("vFourLocalStorage");
         Score();
-        $("#correct").html(globalVariable.correct);
-        $("#incorrect").html(globalVariable.incorrect);
-        $("#unanswered").html(globalVariable.unanswered);
+        //$("#correct").html(globalVariable.correct);
+        //$("#incorrect").html(globalVariable.incorrect);
+        //$("#unanswered").html(globalVariable.unanswered);
     } else {
         var item = localStorage.getItem("stuff");
         console.log("item: " + item);
@@ -52,6 +54,15 @@ function run() {
         clearInterval(intervalId);
         console.log("Quiz starts");
         intervalId = setInterval(decrement, 1000);
+        globalVariable.unanswered = localStorage.getItem("vOneLocalStorage");
+        globalVariable.correct = localStorage.getItem("vTwoLocalStorage");
+        globalVariable.incorrect = localStorage.getItem("vFourLocalStorage");
+        $("#correct").html(globalVariable.correct);
+        $("#incorrect").html(globalVariable.incorrect);
+        $("#unanswered").html(globalVariable.unanswered);
+        localStorage.setItem("vOneLocalStorage", 8);
+        localStorage.setItem("vTwoLocalStorage", 0);
+        localStorage.setItem("vFourLocalStorage", 0);
     }
 }
 
@@ -69,7 +80,7 @@ function Result() {
     console.log("storing the score variables in local storage...");
     globalVariable.done = 1;
     localStorage.setItem("stuff", 4);
-    localStorage.setItem("vOneLocalStorage", globalVariable.unanswered);
+    //localStorage.setItem("vOneLocalStorage", globalVariable.unanswered);
     localStorage.setItem("vTwoLocalStorage", globalVariable.correct);
     localStorage.setItem("vThreeLocalStorage", globalVariable.done);
     localStorage.setItem("vFourLocalStorage", globalVariable.incorrect);
@@ -110,10 +121,16 @@ function unanswered(count) {
 
     //  This function appends unanswered question count
 
+    console.log("count: " + count);
     if (q[count - 1] == false) {
-        q[count - 1] == true;
+        q[count - 1] = true;
         globalVariable.unanswered--;
-    }
+        localStorage.setItem("vOneLocalStorage", globalVariable.unanswered);
+        console.log("question answered!");
+    } else console.log("question unanswered");
+    //globalVariable.unanswered--;
+    //console.log("questions unanswered: " + globalVariable.unanswered);
+    
 }
 
 function reset_radio_buttons(a, b, c, q) {
