@@ -4,7 +4,7 @@
 
 //  Interval Demonstration
 //  Set our number counter to 30.
-var number = 25;
+var number = 100;
 
 //  Variable that will hold our interval ID when we execute
 //  the "run" function
@@ -52,9 +52,6 @@ function run() {
         globalVariable.correct = localStorage.getItem("vTwoLocalStorage");
         globalVariable.incorrect = localStorage.getItem("vFourLocalStorage");
         Score();
-        //$("#correct").html(globalVariable.correct);
-        //$("#incorrect").html(globalVariable.incorrect);
-        //$("#unanswered").html(globalVariable.unanswered);
     } else {
         var item = localStorage.getItem("stuff");
         console.log("item: " + item);
@@ -65,18 +62,14 @@ function run() {
         globalVariable.unanswered = localStorage.getItem("vOneLocalStorage");
         globalVariable.correct = localStorage.getItem("vTwoLocalStorage");
         globalVariable.incorrect = localStorage.getItem("vFourLocalStorage");
-        //globalVariable.incorrect--;
         $("#correct").html(globalVariable.correct);
         if (globalVariable.unanswered == 9) {
             $("#unanswered").html(8);  
-           // $("#incorrect").html(0);
         }
         else    {
             $("#unanswered").html(globalVariable.unanswered);
         }
         $("#incorrect").html(globalVariable.incorrect - 1);
-        //$("#incorrect").html(globalVariable.incorrect);
-        //var unanswered = globalVariable.unanswered/2;
         localStorage.setItem("vOneLocalStorage", 9);
         localStorage.setItem("vTwoLocalStorage", 0);
         localStorage.setItem("vFourLocalStorage", 0);
@@ -97,8 +90,6 @@ function Result() {
     console.log("storing the score variables in local storage...");
     globalVariable.done = 1;
     localStorage.setItem("stuff", 4);
-    //localStorage.setItem("vOneLocalStorage", globalVariable.unanswered);
-    //globalVariable.incorrect--;
     localStorage.setItem("vTwoLocalStorage", globalVariable.correct);
     localStorage.setItem("vThreeLocalStorage", globalVariable.done);
     localStorage.setItem("vFourLocalStorage", globalVariable.incorrect);
@@ -142,29 +133,13 @@ function unanswered(count) {
     console.log("count: " + count);
     if (q[count - 1] == false) {
         q[count - 1] = true;
-        //if (count == 1) {
-        //if (globalVariable.unanswered == 8) {
             console.log("unanswered = " + globalVariable.unanswered);
             console.log("decrement of unaswered");
             globalVariable.unanswered -= 1;
             console.log("unanswered = " + globalVariable.unanswered);
-        //    localStorage.setItem("vOneLocalStorage", globalVariable.unanswered);
-        //}
-        //else {
-        //    globalVariable.unanswered = globalVariable.unanswered - 1;
-        //    
-        //}
-        //globalVariable.unanswered++;
-        //}
-        //else    {
-        //globalVariable.unanswered--;
-        //globalVariable.unanswered++;
-        //}
         localStorage.setItem("vOneLocalStorage", globalVariable.unanswered);
         console.log("question answered!");
     } else console.log("question unanswered");
-    //globalVariable.unanswered--;
-    //console.log("questions unanswered: " + globalVariable.unanswered);
 }
 
 function correct(c)  {
@@ -224,24 +199,6 @@ function answer_check(c, answer)    {
                 incorrect(c);
         }
     }
-    /*
-    if (c == 1) {
-        if (answer == true) {
-            console.log("Correct!");
-            console.log("correct count = " + globalVariable.correct);
-            globalVariable.correct++;
-            //if q[c - 1] == true
-            localStorage.setItem("vTwoLocalStorage", globalVariable.correct);
-            console.log("correct count = " + globalVariable.correct);
-        }
-        else    {
-            console.log("Incorrect!");
-            console.log("incorrect count = " + globalVariable.correct);
-            globalVariable.incorrect++;
-            console.log("incorrect count = " + globalVariable.correct);
-            localStorage.setItem("vFourLocalStorage", globalVariable.incorrect);
-        }
-    } */
 }
 
 function reset_radio_buttons(a, b, c, n, answer) {
