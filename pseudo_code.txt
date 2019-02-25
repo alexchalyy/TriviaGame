@@ -11,20 +11,63 @@ Trivia Game Pseudo Code
 
 5.	If timer runs out of time or done page is pressed, navigate to next page,
 
-		Print correctly answered questions count
+		retrieve from local storage and print correctly answered questions count
 
-		Print incorrectly answered questions count
+		retrieve from local storage and print incorrectly answered questions count
 
-		Print unanswered questions count
+		retrieve from local storage and print unanswered questions count
 
-	else    do while unanswered questions > 0 
+	else    do while unanswered questions > 0, then navigate to the results page
+
+			do the following for each question, if user selects an answer
 
 			if user answers a question
+
+				if user has already answered it
+
+					do nothing, log it
 		
-				subtract 1 from unanswered questions
+				else subtract 1 from unanswered questions, log it, store it in local storage
 
-				if its a correct answer
+				if its a correct answer DONE
+					
+					if user has already answered question DONE
 
-					add 1 to correctly answered questions
+						if the answer before was incorrect DONE
 
-				else    add 1 to incorrectly answered questions
+							add 1 to correct answers, save it to local storage, log it DONE
+
+							subtract 1 from incorrect answers, save it to local storage, log it DONE
+
+						else (if it was correct before) DONE
+							
+							do nothing, log it DONE
+
+					else (if user has not already answered the question) DONE
+
+						add 1 to correct answers, log it, save it to local storage
+
+				else if its not correct answer DONE
+
+					if user has already answered question DONE
+
+						if the answer before was correct
+
+							add 1 to incorrect answers, save it to local storage, log it
+
+							subtract 1 from correct answers, save it to local storage, log it
+
+						else (if the answer before was incorrect)
+
+							do nothing (log it)
+
+					else if user has not already answered the question DONE
+
+						add 1 to incorrect answers, log it, save it to local storage
+
+					
+
+					
+
+						
+
