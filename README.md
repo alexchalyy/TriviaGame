@@ -6,4 +6,8 @@
 
 # Game creation process
 
-Three static html webpages were created for different stages of the game. They were styled using css, bootstrap, and media queries to be mobile responsive. The game logic code is written in javascript using jQueries. Local storage was used to store game scores and transfer them from quiz to results when javacript was terminated and reloaded when quiz page was closed and results page was opened.
+*   Three static html webpages were created for different stages of the game. They were styled using css, bootstrap, and media queries to be mobile responsive. 
+
+*   The game logic code is written in javascript using jQueries. Local storage was used to store game scores and transfer them from quiz to results when javacript was terminated and reloaded when quiz page was closed and results page was opened.
+
+*   Timer code was taken from a class example.

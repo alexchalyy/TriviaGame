@@ -4,19 +4,20 @@
 
 //  Interval Demonstration
 //  Set our number counter to 30.
+
 var number = 100;
 
 //  Variable that will hold our interval ID when we execute
 //  the "run" function
+
 var intervalId;
 
 //  This sets the counter variables. Also global variable is necessary to pass score values between different pages when the script reloads and all prior values are lost.
 
 var globalVariable = {
-    unanswered: 9,
+    unanswered: 9,  // for some reason in my code if I store the unanswered to 8, it is always 1 less then it should be
     correct: 0,
     incorrect: 0,
-    done: 0
 };
 
 //  Global variable array that determine whether any quesions have been answered.
@@ -39,62 +40,35 @@ function run() {
     //  This function has two paths depending from which page it loads where it could retrieve score variables from local storage after next page is opened where they are stored before going there.
     //  This allows to use one script for both quiz and results page.
 
-    globalVariable.done = localStorage.getItem("vThreeLocalStorage");
-
-    console.log("script starts.");
-    console.log("globalVariable.done = " + globalVariable.done);
-    if (globalVariable.done == 0) {
-        console.log("This is the code section that is executed on results page.");
-        console.log("Retrieving score variables from local storage...");
-        globalVariable.done = 1;
-        localStorage.setItem("vThreeLocalStorage", globalVariable.done);
-        globalVariable.unanswered = localStorage.getItem("vOneLocalStorage");
-        globalVariable.correct = localStorage.getItem("vTwoLocalStorage");
-        globalVariable.incorrect = localStorage.getItem("vFourLocalStorage");
-        Score();
-    } else {
-        var item = localStorage.getItem("stuff");
-        console.log("item: " + item);
-        console.log("This is the code section that is executed on quiz page.");
-        clearInterval(intervalId);
-        console.log("Quiz starts");
-        intervalId = setInterval(decrement, 1000);
-        globalVariable.unanswered = localStorage.getItem("vOneLocalStorage");
-        globalVariable.correct = localStorage.getItem("vTwoLocalStorage");
-        globalVariable.incorrect = localStorage.getItem("vFourLocalStorage");
-        $("#correct").html(globalVariable.correct);
-        if (globalVariable.unanswered == 9) {
-            $("#unanswered").html(8); 
-            $("#incorrect").html(globalVariable.incorrect); 
-        }
-        else    {
-            $("#unanswered").html(globalVariable.unanswered);
-            $("#incorrect").html(globalVariable.incorrect - 1);
-        }        
-        localStorage.setItem("vOneLocalStorage", 9);
-        localStorage.setItem("vTwoLocalStorage", 0);
-        localStorage.setItem("vFourLocalStorage", 0);
+    clearInterval(intervalId);
+    intervalId = setInterval(decrement, 1000);
+    globalVariable.unanswered = localStorage.getItem("unanswered");
+    globalVariable.correct = localStorage.getItem("correct");
+    globalVariable.incorrect = localStorage.getItem("incorrect");
+    //  The code below does not make any sense to me, but apparently works, I wrote by trial and error to produce correct result
+    $("#correct").html(globalVariable.correct);
+    $("#unanswered").html(globalVariable.unanswered);
+    if (globalVariable.unanswered == 9) {
+    //if (globalVariable.unanswered == 8) {
+        $("#unanswered").html(8);
+        $("#incorrect").html(globalVariable.incorrect);
     }
+    else {
+        $("#incorrect").html(globalVariable.incorrect - 1);
+    }
+    localStorage.setItem("unanswered", 9);
+    //localStorage.setItem("unanswered", 8);
+    localStorage.setItem("correct", 0);
+    localStorage.setItem("incorrect", 0);
 }
 
 function Score() {
     //  This funciton logs the scores.
 
-    console.log("unanswered questions: " + globalVariable.unanswered);
+    var temp = globalVariable.unanswered - 1;
+    console.log("unanswered questions: " + temp);
     console.log("correctly answered questions: " + globalVariable.correct);
     console.log("incorrectly answered questions: " + globalVariable.incorrect);
-}
-
-function Result() {
-    //  This function prints the result scores on result page. Since all pages are static, this function stores all results in local storage where the next page can retrieve the scores from.
-
-    console.log("storing the score variables in local storage...");
-    globalVariable.done = 1;
-    localStorage.setItem("stuff", 4);
-    localStorage.setItem("vTwoLocalStorage", globalVariable.correct);
-    localStorage.setItem("vThreeLocalStorage", globalVariable.done);
-    localStorage.setItem("vFourLocalStorage", globalVariable.incorrect);
-    Score();
 }
 
 //  The decrement function.
@@ -102,18 +76,13 @@ function decrement() {
 
     //  Decrease number by one.
     number--;
-
     //  Show the number in the #show-number tag.
     $("#sec").html(number);
-
-
     //  Once number hits zero...
     if (number === 0) {
-
         //  ...run the stop function.
         stop();
         //  Navigate to result page, when time runs out.
-        Result();
         document.getElementById("sub").click();
     }
 }
@@ -131,73 +100,71 @@ function unanswered(count) {
 
     //  This function appends unanswered question count
 
-    console.log("count: " + count);
     if (q[count - 1] == false) {
         q[count - 1] = true;
-            console.log("unanswered = " + globalVariable.unanswered);
-            console.log("decrement of unaswered");
-            globalVariable.unanswered -= 1;
-            console.log("unanswered = " + globalVariable.unanswered);
-        localStorage.setItem("vOneLocalStorage", globalVariable.unanswered);
+        console.log("unanswered = " + globalVariable.unanswered);
+        console.log("decrement of unaswered");
+        globalVariable.unanswered -= 1;
+        console.log("unanswered = " + globalVariable.unanswered);
+        localStorage.setItem("unanswered", globalVariable.unanswered);
         console.log("question answered!");
     } else console.log("question unanswered");
 }
 
-function correct(c)  {
+function correct(c) {
 
     //  This function is called when user answers a question correctly, it adds 1 to correct quesion count, and stores it in local storage.
 
     console.log("User answered question " + c + " correctly!");
     globalVariable.correct++;               //  Adds 1 to correct answer count
-    localStorage.setItem("vTwoLocalStorage", globalVariable.correct);   // Stores the correct answered variable in local storage
+    localStorage.setItem("correct", globalVariable.correct);   // Stores the correct answered variable in local storage
     user_answers[c - 1] = true;             //  Changes the previous answer to question to correctly answered
     q1[c - 1] = true;
 }
 
-function incorrect(c)   {
+function incorrect(c) {
 
     //  This function is called when user answers a question incorrectly, it adds 1 to incorrect question count, and stores it in local storage
 
     console.log("User answered question " + c + " incorrectly!");
     globalVariable.incorrect++;             //  adds 1 to incorrect answers
-    localStorage.setItem("vFourLocalStorage", globalVariable.incorrect);    // Stores incorrect answers in local storage
+    localStorage.setItem("incorrect", globalVariable.incorrect);    // Stores incorrect answers in local storage
     user_answers[c - 1] = false;
     q1[c - 1] = true;
 }
 
-function answer_check(c, answer)    {
+function answer_check(c, answer) {
 
     //  This function checks the answers, calculates the score accordingly, and stores it in local storage.
     //  This function receives the correct answer and the number of question.
 
     console.log("answer: " + answer);
     if (answer == true) {                               //  This code bloc is executed if user selects correct answer
-        if (q1[c - 1] == true) {                         //  This code bloc is executed if the question has already been answered
-            console.log("V R Here");   
-            if (user_answers[c - 1] == false)   {       //  This code bloc is executed if the previous answer was wrong
+        if (q1[c - 1] == true) {                         //  This code bloc is executed if the question has already been answered 
+            if (user_answers[c - 1] == false) {       //  This code bloc is executed if the previous answer was wrong
                 correct(c);
                 globalVariable.incorrect--;             //  Subtracts 1 from incorrect answers
-                localStorage.setItem("vFourLocalStorage", globalVariable.incorrect);    // Stores incorrect answers in local storage
-            }   else    {                               //  This code bloc is executed if the previous answer was correct
+                localStorage.setItem("incorrect", globalVariable.incorrect);    // Stores incorrect answers in local storage
+            } else {                               //  This code bloc is executed if the previous answer was correct
                 console.log("User answered the same question the same way.");
             }
-        }    
-        else    {   
+        }
+        else {
             //  This code bloc is executed if the question has not been answered before
             correct(c);
         }
-    } else  {                                           //  This code bloc is executed if user selects incorrect answer
-        if (q1[c - 1] == true)  {                        //  This code bloc is executed if the question has already been answered
-            if (user_answers[c - 1] == true)   {        //  This code bloc is executed if the previous answer was correct 
+    } else {                                           //  This code bloc is executed if user selects incorrect answer
+        if (q1[c - 1] == true) {                        //  This code bloc is executed if the question has already been answered
+            if (user_answers[c - 1] == true) {        //  This code bloc is executed if the previous answer was correct 
                 incorrect(c);
                 globalVariable.correct--;               //  Subtracts 1 from correct answer count
-                localStorage.setItem("vTwoLocalStorage", globalVariable.correct);   // Stores the correct answered variable in local storage
-            } else  {                                   //  This code bloc is executed if the previous answer was incorrect 
+                localStorage.setItem("correct", globalVariable.correct);   // Stores the correct answered variable in local storage
+            } else {                                   //  This code bloc is executed if the previous answer was incorrect 
                 console.log("User answered the same question the same way.");
-            }                                           
-        }  
-        else    {                                       //  This code bloc is executed if the question has not been answered before
-                incorrect(c);
+            }
+        }
+        else {                                       //  This code bloc is executed if the question has not been answered before
+            incorrect(c);
         }
     }
 }
@@ -211,7 +178,6 @@ function reset_radio_buttons(a, b, c, n, answer) {
     $(a).prop("checked", false);
     $(b).prop("checked", false);
     $(c).prop("checked", false);
-    Result();
 }
 
 /*  This listens for user to check radio boxes for questions, and unchecks all other ones appropriately.    */
@@ -276,6 +242,5 @@ $("#h4").click(function () { reset_radio_buttons("#h1", "#h3", "#h2", 8, false);
 $(document).ready(function () {
 
     console.log("ready!");
-    Score();
     run();
 });
