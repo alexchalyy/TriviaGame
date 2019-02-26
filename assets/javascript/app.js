@@ -63,13 +63,20 @@ function run() {
         globalVariable.correct = localStorage.getItem("vTwoLocalStorage");
         globalVariable.incorrect = localStorage.getItem("vFourLocalStorage");
         $("#correct").html(globalVariable.correct);
+        //$("#unanswered").html(globalVariable.unanswered - 1);
         if (globalVariable.unanswered == 9) {
-            $("#unanswered").html(8);  
+            $("#unanswered").html(8); 
+            $("#incorrect").html(globalVariable.incorrect); 
         }
         else    {
             $("#unanswered").html(globalVariable.unanswered);
+            $("#incorrect").html(globalVariable.incorrect - 1);
         }
-        $("#incorrect").html(globalVariable.incorrect - 1);
+        //if (globalVariable.unanswered == 8) {
+        //    $("#incorrect").html(0);
+        //}
+        //else $("#incorrect").html(globalVariable.incorrect - 1);
+        
         localStorage.setItem("vOneLocalStorage", 9);
         localStorage.setItem("vTwoLocalStorage", 0);
         localStorage.setItem("vFourLocalStorage", 0);
