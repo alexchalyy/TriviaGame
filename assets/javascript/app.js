@@ -49,7 +49,6 @@ function run() {
     $("#correct").html(globalVariable.correct);
     $("#unanswered").html(globalVariable.unanswered);
     if (globalVariable.unanswered == 9) {
-    //if (globalVariable.unanswered == 8) {
         $("#unanswered").html(8);
         $("#incorrect").html(globalVariable.incorrect);
     }
