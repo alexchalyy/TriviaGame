@@ -62,15 +62,16 @@ function run() {
         }
         else $("#incorrect").html(globalVariable.incorrect);
     }
+    //  Below are workarounds to display scores correctly for certain edge cases found during testing
+    //  Edge case work around # 1
     if (globalVariable.incorrect == 9)  {
         $("#incorrect").html(8);
     }
-    console.log(globalVariable.correct);
-    console.log(globalVariable.incorrect);
-    console.log("Now I'm here");
+    //  Edge case work around # 2
     if (globalVariable.correct == 4 && globalVariable.incorrect == 5)   {
         $("#incorrect").html(4);
     }
+    //  Edge case work around # 3
     if (globalVariable.correct == 2 && globalVariable.incorrect == 7)   {
         $("#incorrect").html(6);
     }
