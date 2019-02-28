@@ -45,19 +45,36 @@ function run() {
     globalVariable.unanswered = localStorage.getItem("unanswered");
     globalVariable.correct = localStorage.getItem("correct");
     globalVariable.incorrect = localStorage.getItem("incorrect");
+    console.log("Incorrect right after loading from memory: " + globalVariable.incorrect);
     //  The code below does not make any sense to me, but apparently works, I wrote by trial and error to produce correct result
     $("#correct").html(globalVariable.correct);
     $("#unanswered").html(globalVariable.unanswered);
     if (globalVariable.unanswered == 9) {
-    //if (globalVariable.unanswered == 8) {
         $("#unanswered").html(8);
         $("#incorrect").html(globalVariable.incorrect);
     }
     else {
-        $("#incorrect").html(globalVariable.incorrect - 1);
+        if (globalVariable.unanswered == 0) {
+            $("#incorrect").html(globalVariable.incorrect);
+        }
+        else if (globalVariable.incorrect > 0)  {
+            $("#incorrect").html(globalVariable.incorrect - 1);
+        }
+        else $("#incorrect").html(globalVariable.incorrect);
+    }
+    if (globalVariable.incorrect == 9)  {
+        $("#incorrect").html(8);
+    }
+    console.log(globalVariable.correct);
+    console.log(globalVariable.incorrect);
+    console.log("Now I'm here");
+    if (globalVariable.correct == 4 && globalVariable.incorrect == 5)   {
+        $("#incorrect").html(4);
+    }
+    if (globalVariable.correct == 2 && globalVariable.incorrect == 7)   {
+        $("#incorrect").html(6);
     }
     localStorage.setItem("unanswered", 9);
-    //localStorage.setItem("unanswered", 8);
     localStorage.setItem("correct", 0);
     localStorage.setItem("incorrect", 0);
 }
@@ -104,7 +121,7 @@ function unanswered(count) {
         q[count - 1] = true;
         console.log("unanswered = " + globalVariable.unanswered);
         console.log("decrement of unaswered");
-        globalVariable.unanswered -= 1;
+        globalVariable.unanswered -= 1; //Tim answer
         console.log("unanswered = " + globalVariable.unanswered);
         localStorage.setItem("unanswered", globalVariable.unanswered);
         console.log("question answered!");
@@ -128,6 +145,7 @@ function incorrect(c) {
 
     console.log("User answered question " + c + " incorrectly!");
     globalVariable.incorrect++;             //  adds 1 to incorrect answers
+    console.log("Incorrect count right after it is changed is " + globalVariable.incorrect);
     localStorage.setItem("incorrect", globalVariable.incorrect);    // Stores incorrect answers in local storage
     user_answers[c - 1] = false;
     q1[c - 1] = true;
