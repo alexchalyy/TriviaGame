@@ -15,7 +15,7 @@ var intervalId;
 //  This sets the counter variables. Also global variable is necessary to pass score values between different pages when the script reloads and all prior values are lost.
 
 var globalVariable = {
-    unanswered: 9,  // for some reason in my code if I store the unanswered to 8, it is always 1 less then it should be
+    unanswered: 8,
     correct: 0,
     incorrect: 0,
 };
@@ -49,39 +49,12 @@ function run() {
     //  The code below does not make any sense to me, but apparently works, I wrote by trial and error to produce correct result
     $("#correct").html(globalVariable.correct);
     $("#unanswered").html(globalVariable.unanswered);
+    $("#incorrect").html(globalVariable.incorrect);
     if (globalVariable.unanswered == 9) {
         $("#unanswered").html(8);
-        $("#incorrect").html(globalVariable.incorrect);
     }
-    else {
-        if (globalVariable.unanswered == 0) {
-            $("#incorrect").html(globalVariable.incorrect);
-        }
-        else if (globalVariable.incorrect > 0) {
-            $("#incorrect").html(globalVariable.incorrect - 1);
-        }
-        else $("#incorrect").html(globalVariable.incorrect);
-    }
-    //  Below are workarounds to display scores correctly for certain edge cases found during testing
-    //  Edge case work around # 1
-    if (globalVariable.incorrect == 9) {
-        $("#incorrect").html(8);
-    }
-    //  Edge case work around # 2
-    if (globalVariable.correct == 4 && globalVariable.incorrect == 5) {
-        $("#incorrect").html(4);
-    }
-    //  Edge case work around # 3
-    if (globalVariable.correct == 2 && globalVariable.incorrect == 7) {
-        $("#incorrect").html(6);
-    }
-    //  Edge case work around # 4
-    if (globalVariable.correct == 3 && globalVariable.incorrect == 6) {
-        $("#incorrect").html(5);
-    }
-    //  Edge case work around # 5
-    if (globalVariable.correct == 1 && globalVariable.incorrect == 8) {
-        $("#incorrect").html(7);
+    if (globalVariable.incorrect > 0)   {
+        $("#incorrect").html(globalVariable.incorrect - 1);
     }
     localStorage.setItem("unanswered", 9);
     localStorage.setItem("correct", 0);
