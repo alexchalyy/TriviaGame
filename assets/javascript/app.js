@@ -75,6 +75,10 @@ function run() {
     if (globalVariable.correct == 2 && globalVariable.incorrect == 7)   {
         $("#incorrect").html(6);
     }
+    //  Edge case work around # 4
+    if (globalVariable.correct == 3 && globalVariable.incorrect == 6)   {
+        $("#incorrect").html(5);
+    }
     localStorage.setItem("unanswered", 9);
     localStorage.setItem("correct", 0);
     localStorage.setItem("incorrect", 0);
